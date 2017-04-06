@@ -1,0 +1,104 @@
+header {
+	background-color: #1B1B1B;
+	padding: 20px 30px;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	flex: 0 0 auto;
+	color: darkgrey;
+}
+
+body {
+	font-family: 'Helvetica';
+	text-align: center;
+	background-color: whitesmoke;
+}
+
+.lightbox {
+	background: rgba(0,0,0,0.9);
+	bottom: 0;
+	color: #fff;
+	display: none;
+	left: 0;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	top: 0;
+
+}
+
+.lightboxImage{
+	max-height: 300px;
+}
+
+@media screen and (orientation: landscape) {
+	.lightbox {
+		overflow: scroll;
+	}
+}
+
+.container {
+	margin: auto;
+	max-width: 1200px;
+}
+
+.cell img {
+	max-width: 100%;
+	display: block;
+	cursor: pointer;
+}
+
+.cell {
+	margin: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+	.grid {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
+	.cell {
+		width: calc(50% - 2rem);
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	.cell {
+		width: calc(33.3% - 2rem);
+	}
+}
+
+.toggleBtn {
+	font-family: Tahoma;
+	-webkit-appearance: none;
+	display: inline-block;
+	margin: 16px 10px 0 0;
+	font-size: 1rem;
+	text-shadow: none;
+	line-height: 1.2;
+	outline: 0;
+	padding: 10px 16px;
+	position: relative;
+	border-radius: 3px;
+	color: white;
+	white-space: nowrap;
+	cursor: pointer;
+	text-align: center;
+	background: none;
+	border: 3px solid #ccc;
+}
+.toggleBtn:hover {
+	color: black;
+	background-color:#dfdfdf;
+}
+
+.close {
+	cursor: pointer;
+	right: 40px;
+	position: absolute;
+	text-transform: uppercase;
+	top: 20px;
+}
+
+

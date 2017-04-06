@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="lightbox.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<h1> Flicr Lightbox </h1>
+		</header>
+		<div class = "container">
+			<div id="galleryContainer" class = "grid">
+			</div>
+		</div>
+		<div class="lightbox" id="lightboxContainer">
+			<h2 class="title" id="lightboxTitle">
+			</h2>
+			<img class="lightboxImage"id="lightboxImg"/>
+			<br/>
+			<button class="toggleBtn prev" id="previousBtn"> Prev </button>
+			<button class="toggleBtn next" id="nextBtn"> Next </button>
+
+			<div class="close" id="close"> X </div>
+		</div>
+
+	  	<script src="lightbox.js"></script>
+	</body>
+
+</html>
