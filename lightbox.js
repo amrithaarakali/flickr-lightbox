@@ -63,16 +63,25 @@ function setUpToggleButtons() {
     prevButton.addEventListener('click', handlePrev);
     nextButton.addEventListener('click', handleNext);
     document.getElementById('close').addEventListener('click', handleClose);
+    // add event listener for keyboard shortcuts
+    window.addEventListener('keydown', setUpKeyboardEvents);
+}
 
-    // add event listeners for keyboard shortcuts
-    window.addEventListener('keydown', handlePrev);
-    window.addEventListener('keydown', handleNext);
-    window.addEventListener('keydown', handleClose);
+// Handle keyboard events for next, prev and close buttons
+function setUpKeyboardEvents(event) {
+    if (event.keyCode === 39) {
+        handleNext();
+    }
+    if (event.keyCode === 37) {
+        handlePrev();
+    }
+    if (event.keyCode === 27) {
+        handleClose();
+    }
 }
 
 // setup the lightbox and handle selection, toggling of images.
 function setUpLightbox(id) {
-
     // clear the 'current' context of the image displayed before change
     if (document.getElementsByClassName('current').length > 0) {
         let prev = document.getElementsByClassName('current')[0];
@@ -83,67 +92,57 @@ function setUpLightbox(id) {
     currentImage = document.getElementById(id);
     currentImage.className += ' current';
 
+    //Make the lightbox element visible
     document.getElementById('lightboxContainer').style.display = 'block';
 
     // change the image displayed in the lightbox by replacing the image source and the title
     document.getElementById('lightboxImg').src = currentImage.src;
     document.getElementById('lightboxTitle').innerHTML = currentImage.getAttribute('data-title');
+    // TODO enhance image size for mobile devices
 }
 
 // select image based on the gallery thumbnail clicked
 function selectImage(event) {
     setUpLightbox(event.target.id);
+    // Stop event from propagating up the DOM
     event.stopPropagation();
 }
 
 // handling the next button click
-function handleNext (event) {
-
+function handleNext() {
     // find index of current image in the list of photos in the album
     let index = photoSet.findIndex(x => x.id === currentImage.id);
-    let targetId = event.target.id;
-
-    // verify if there's a target id from the button click or the keyboard shortcut is pressed
-    if (targetId || event.which === 39) {
-
-        if (index < photoSet.length - 1) {
-            //update the current image to the next image in the album
-            currentImage = photoSet[index + 1];
-        }
-        else {
-            // If current image is the last image in the album, current image is not updated.
-            // Lets the user know they've reached the end of the album
-            currentImage = photoSet[index];
-        }
-
-        // update ligthbox after change
-        setUpLightbox(currentImage.id);
+    if (index < photoSet.length - 1) {
+        //update the current image to the next image in the album
+        currentImage = photoSet[index + 1];
     }
+    else {
+        // If current image is the last image in the album, current image is not updated.
+        // Lets the user know they've reached the end of the album
+        currentImage = photoSet[index];
+    }
+
+    // update ligthbox after change
+    setUpLightbox(currentImage.id);
 }
 
-function handlePrev (event) {
+function handlePrev() {
     // TODO move to a common function
     let index = photoSet.findIndex(x => x.id === currentImage.id);
-    let targetId = event.target.id;
-
-    if(targetId || event.keyCode === 37) {
-        //update the current image to the prev image in the album
-        if(index > 0) {
-            currentImage = photoSet[index - 1];
-        }
-        else {
-            // If current image is the first image in the album, current image is not updated.
-            currentImage = photoSet[0];
-        }
-        setUpLightbox(currentImage.id);
+    //update the current image to the prev image in the album
+    if (index > 0) {
+        currentImage = photoSet[index - 1];
     }
+    else {
+        // If current image is the first image in the album, current image is not updated.
+        currentImage = photoSet[0];
+    }
+    setUpLightbox(currentImage.id);
 }
 
-function handleClose (event) {
-    if( event.target.id || event.keyCode === 27) {
-        // hide the lightbox
-        document.getElementById('lightboxContainer').style.display = 'none';
-    }
+function handleClose() {
+    // hide the lightbox
+    document.getElementById('lightboxContainer').style.display = 'none';
 }
 
 window.onload = init();

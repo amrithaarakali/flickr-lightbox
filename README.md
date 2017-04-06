@@ -1,7 +1,7 @@
-Photo Lightbox
+Flickr Lightbox
 ===========
 
-Go to - <link> for a live demo.
+Go to - https://amrithaarakali.github.io/flickr-lightbox/lightbox.html for a live demo.
 
 - The app pulls images from a public Flickr album using the Flickr API.
 - View the photos from the album on the gallery.
